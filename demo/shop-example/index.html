@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html data-ng-app="App">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-data.js"></script>    
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+  
+<body data-ng-controller="TestController">
+	<header>
+		<div class="container">
+			<img src="images/logo.png" width="298" height="76" alt="logo" align="left" />
+		</div>
+	</header>
+	<section class="banner">
+		<img src="images/banner.jpg" width="3376" height="560" alt="" />
+	</section>
+    <section class="main-wrap">
+		<div class="container">
+			<h2>Mobiles</h2>
+			<div class="side-sec">
+				<h4>Brand</h4>
+				<ul>
+					<li ng-repeat="tech in brandName">
+					<label>
+						<input type="checkbox" ng-model="tech.on">{{tech.brand}}
+					</label>
+					</li>
+				</ul>
+				<h4>RAM</h4>
+				<ul>
+					<li ng-repeat="ram in rams">
+					<label>
+						<input type="checkbox" ng-model="ram.on">{{ram.ram}}
+					</label>
+					</li>
+				</ul>
+				<h4>Internal Storage</h4>
+				<ul>
+					<li ng-repeat="intstrage in intstrages">
+					<label>
+						<input type="checkbox" ng-model="intstrage.on">{{intstrage.intstrage}}
+					</label>
+					</li>
+				</ul>
+				<h4>Excternal Storage</h4>
+				<ul>
+					<li ng-repeat="extstrage in extstrages">
+					<label>
+						<input type="checkbox" ng-model="extstrage.on">{{extstrage.extstrage}}
+					</label>
+					</li>
+				</ul>
+				<h4>Screen Size</h4>
+				<ul>
+					<li ng-repeat="screensize in screensizes">
+					<label>
+						<input type="checkbox" ng-model="screensize.on">{{screensize.screensize}}
+					</label>
+					</li>
+				</ul>
+				<h4>Battery</h4>
+				<ul>
+					<li ng-repeat="battery in batterys">
+					<label>
+						<input type="checkbox" ng-model="battery.on">{{battery.battery}}
+					</label>
+					</li>
+				</ul>
+				<h4>Primary Camera</h4>
+				<ul>
+					<li ng-repeat="primarycam in primarycams">
+					<label>
+						<input type="checkbox" ng-model="primarycam.on">{{primarycam.primarycam}}
+					</label>
+					</li>
+				</ul>
+				<h4>Secondary Camera</h4>
+				<ul>
+					<li ng-repeat="secondarycam in secondarycams">
+					<label>
+						<input type="checkbox" ng-model="secondarycam.on">{{secondarycam.secondarycam}}
+					</label>
+					</li>
+				</ul>
+				 <h4>Sim</h4>
+				<ul>
+					<li ng-repeat="sim in sims">
+					<label>
+						<input type="checkbox" ng-model="sim.on">{{sim.sim}}
+					</label>
+					</li>
+				</ul>
+			</div>
+			<div class="main-sec">
+				<div  class="high-periority">
+					<select ng-model="order" ng-show="mobiles.length > 0">
+						<option value="-added">Recently Added</option>
+						<option value="price">Price (low to high)</option>
+						<option value="-price">Price (high to low)</option>
+					</select>
+				</div>
+				<div class="pop-up-main">
+					<div class="content-main" ng-repeat="mobile in mobiles | orderBy: order | customFilter:(brandName|filter:{on:true})  | customFilter:(rams|filter:{on:true})  | customFilter:(intstrages|filter:{on:true})  | customFilter:(extstrages|filter:{on:true})  | customFilter:(screensizes|filter:{on:true})  | customFilter:(batterys|filter:{on:true})  | customFilter:(primarycams|filter:{on:true})  | customFilter:(secondarycams|filter:{on:true})  | customFilter:(sims|filter:{on:true})">						
+						<div class="lb-content scrolAdded" id="{{mobile.link}}">
+							<a href="javascript:;" class="back-btn"><--Back </a>
+							<div class="popup-img"><img src="images/mobiles/{{mobile.img}}.jpg" ></div>
+							<div class="popup-sec">
+								<table>
+									<tr>
+										<td>Name </td>
+										<td>{{mobile.name}}</td>
+									</tr>
+									<tr>
+										<td>RAM</td>
+										<td>{{mobile.ram}}</td>
+									</tr>
+									<tr>
+										<td>Operating System:</td>
+										<td>{{mobile.oppsys}}</td>
+									</tr>
+									<tr>
+										<td>Internal Storage</td>
+										<td>{{mobile.intstrage}}</td>
+									</tr>
+									<tr>
+										<td>Excternal Storage</td>
+										<td>{{mobile.extstrage}}</td>
+									</tr>
+									<tr>
+										<td>Screen Size</td>
+										<td>{{mobile.screensize}}</td>
+									</tr>
+									<tr>
+										<td>Net Type</td>
+										<td>{{mobile.nettype}}</td>
+									</tr>
+									<tr>
+										<td>Battery</td>
+										<td>{{mobile.battery}}</td>
+									</tr>
+									<tr>
+										<td>Primary Camera</td>
+										<td>{{mobile.primarycam}}</td>
+									</tr>
+									<tr>
+										<td>Secondary Camera</td>
+										<td>{{mobile.secondarycam}}</td>
+									</tr>
+									<tr>
+										<td>Sim</td>
+										<td>{{mobile.sim}}</td>
+									</tr>
+									<tr>
+										<td>Price</td>
+										<td>Rs.{{mobile.price}}</td>
+									</tr>
+								</table>
+								<div class="btn-sec">
+									<a href="javascript:;">Add to Cart</a><a href="javascript:;">Buy Now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul class="list-views">
+					<li ng-repeat="mobile in mobiles | orderBy: order | customFilter:(brandName|filter:{on:true})  | customFilter:(rams|filter:{on:true})  | customFilter:(intstrages|filter:{on:true})  | customFilter:(extstrages|filter:{on:true})  | customFilter:(screensizes|filter:{on:true})  | customFilter:(batterys|filter:{on:true})  | customFilter:(primarycams|filter:{on:true})  | customFilter:(secondarycams|filter:{on:true})  | customFilter:(sims|filter:{on:true})">
+						<a class="lb-1" href="javascript:;" rel="{{mobile.link}}">
+							<div class="img-sec"><img src="images/mobiles/{{mobile.img}}.jpg" ></div>
+							<div class="data-sec">
+								<table>
+									<tr>
+										<td>{{mobile.brand}}</td>
+									</tr>
+									<tr>
+										<td>{{mobile.name}}</td>
+									</tr>
+									<tr>
+										<td>Rs.{{mobile.price}}</td>
+									</tr>
+									<tr>
+										<td><div class="shipping"><span>Free Shipping</span></div></td>
+									</tr>
+								</table>
+							</div>
+						</a>
+					</li>
+				</ul>
+				
+				<!-- <ul class="list-views">
+					<li ng-repeat="mobile in mobiles | orderBy: order | customFilter:(brandName|filter:{on:true})  | customFilter:(rams|filter:{on:true})  | customFilter:(intstrages|filter:{on:true})  | customFilter:(extstrages|filter:{on:true})  | customFilter:(screensizes|filter:{on:true})  | customFilter:(batterys|filter:{on:true})  | customFilter:(primarycams|filter:{on:true})  | customFilter:(secondarycams|filter:{on:true})  | customFilter:(sims|filter:{on:true})">
+						<div class="img-sec"><img src="{{mobile.img}}" ></div>
+						<div class="data-sec">
+							<table>
+								<tr>
+									<td>Name</td>
+									<td>{{mobile.name}}</td>
+								</tr>
+								<tr>
+									<td>RAM</td>
+									<td>{{mobile.ram}}</td>
+								</tr>
+								<tr>
+									<td>Operating System:</td>
+									<td>{{mobile.oppsys}}</td>
+								</tr>
+								<tr>
+									<td>Internal Storage</td>
+									<td>{{mobile.intstrage}}</td>
+								</tr>
+								<tr>
+									<td>Excternal Storage</td>
+									<td>{{mobile.extstrage}}</td>
+								</tr>
+								<tr>
+									<td>Screen Size</td>
+									<td>{{mobile.screensize}}</td>
+								</tr>
+								<tr>
+									<td>Net Type</td>
+									<td>{{mobile.nettype}}</td>
+								</tr>
+								<tr>
+									<td>Battery</td>
+									<td>{{mobile.battery}}</td>
+								</tr>
+								<tr>
+									<td>Primary Camera</td>
+									<td>{{mobile.primarycam}}</td>
+								</tr>
+								<tr>
+									<td>Secondary Camera</td>
+									<td>{{mobile.secondarycam}}</td>
+								</tr>
+								<tr>
+									<td>Sim</td>
+									<td>{{mobile.sim}}</td>
+								</tr>
+								<tr>
+									<td>Price</td>
+									<td>{{mobile.price}}</td>
+								</tr>
+							</table>
+						</div>
+					</li>
+				</ul> -->
+			</div>
+		</div>
+    </section>	
+</body>
+
+</html>
